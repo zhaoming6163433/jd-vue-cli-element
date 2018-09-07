@@ -6,11 +6,20 @@
     <meta name="format-detection" content="telephone=no" />
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>渤海银行模型展示</title>
+    <title>配置完整的vue-cli</title>
+    <link rel="manifest" href="static/manifest.json">
     <script src="static/js/dateformat.js" type="text/javascript" charset="utf-8"></script>
     <script src="static/<%= htmlWebpackPlugin.options.vendorJsName %>"></script>
 </head>
   <body>
+    <!-- 注册service-worker.js -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./service-worker.js');
+            });
+        }
+    </script>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
