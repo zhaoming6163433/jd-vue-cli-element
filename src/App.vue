@@ -18,7 +18,9 @@ export default {
     data() {
         return {
             titlename: {
-                'index': '首页'
+                'index': '首页',
+                'home':'健康列表',
+                'detail':'健康详情'
             }
         }
     },
@@ -29,9 +31,6 @@ export default {
         router.beforeEach((to, from, next) => {
             next();
             this.firstitle();
-            $(document).unbind('scroll');
-            //运行滚动条滚动
-            util.allscroll();
         });
         //首次进入页面设置标题
         this.firstitle();
@@ -48,11 +47,10 @@ export default {
             }
             let _arr = name.split('/');
             name = _arr[_arr.length - 1];
-
             if (name) {
                 document.title = this.titlename[name]
             }else{
-                document.title = "PC";
+                document.title = "健康列表";
             }
         }
     },

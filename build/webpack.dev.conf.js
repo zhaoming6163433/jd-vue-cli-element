@@ -7,6 +7,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -34,6 +35,10 @@ module.exports = merge(baseWebpackConfig, {
       // 加载dll文件
       vendorJsName: bundleConfig.vendor.js
     }),
-    new FriendlyErrorsPlugin()
+    new FriendlyErrorsPlugin(),
+    new SkeletonWebpackPlugin({
+        webpackConfig: require('./webpack.skeleton.conf'),
+        quiet: true
+    })
   ]
 })

@@ -1,20 +1,20 @@
 {
-    "scope": "/",
-    "name": "我的应用",
-    "short_name": "我的应用",
-    "start_url": "/",
+    "scope": "/newvuecli/",
+    "name": "健康列表",
+    "short_name": "健康列表短名字",
+    "start_url": "/newvuecli/",
     "display": "standalone",
-    "description": "我的应用desc",
+    "description": "我的健康列表",
     "orientation": "portrait",
     "theme_color": "#3f51b5",
     "background_color": "#fff",
     "icons": [{
-      "src": "img/favicon-32x32.png",
+      "src": "img/favicon32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "img/msapplication-icon-144x144.png",
+      "src": "img/favicon144.png",
       "sizes": "144x144",
       "type": "image/png"
     }

@@ -10,6 +10,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+var SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 
 var env = config.build.env
 
@@ -97,11 +98,16 @@ var webpackConfig = merge(baseWebpackConfig, {
     ]),
     // service worker caching
     new SWPrecacheWebpackPlugin({
-        cacheId: 'my-vue-app',
+        cacheId: 'my-vue-app-1',
         filename: 'service-worker.js',
         staticFileGlobs: ['dist/**/*.{js,html,css}'],
         minify: true,
         stripPrefix: 'dist/'
+    }),
+    // inject skeleton content(DOM & CSS) into HTML
+    new SkeletonWebpackPlugin({
+        webpackConfig: require('./webpack.skeleton.conf'),
+        quiet: true
     })
   ]
 })

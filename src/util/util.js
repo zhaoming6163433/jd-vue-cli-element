@@ -247,6 +247,13 @@ const utils = {
             duration: appConfigs.toastime
         });
     },
+    loadingopen(){
+        console.log(123)
+        Vue.$indicator.open();
+    },
+    loadingclose(){
+        Vue.$indicator.close();
+    },
     //校验银行卡
     bankcardreg() {
         let _cardobj = new cardobj();
