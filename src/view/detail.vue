@@ -50,6 +50,7 @@
         article{
             max-width: 50rem;
             margin: 1rem auto;
+            padding:0 1rem;
         }
         title{
             margin-top:1rem;
