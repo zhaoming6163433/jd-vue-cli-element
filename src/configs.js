@@ -28,7 +28,7 @@ switch (process.env.srconfig) {
 		get_signature = 'https://healthapi.zhiscity.com/wmp/rest/weixinShare/getBase4JsSdk/ff8080815cd3833d015cd38e0c010004?';
 		break;
 	case 'pro':
-		urlWebHttp = "https://devo2o.zhiscity.com";
+		urlWebHttp = "https://oldpwatest.todaypocket.cn";
 		get_signature = 'https://healthapi.zhiscity.com/wmp/rest/weixinShare/getBase4JsSdk/ff8080815d2a2b25015d83703046009a?';
 		break;
 	case 'testdev':
@@ -36,7 +36,7 @@ switch (process.env.srconfig) {
 		get_signature = 'https://healthapi.zhiscity.com/wmp/rest/weixinShare/getBase4JsSdk/ff8080815cd3833d015cd38e0c010004?';
 		break;
 	default://默认开发
-		urlWebHttp = "http://devo2o.zhiscity.com";
+		urlWebHttp = "https://oldpwatest.todaypocket.cn";
 		get_signature = 'https://healthapi.zhiscity.com/wmp/rest/weixinShare/getBase4JsSdk/ff8080815cd3833d015cd38e0c010004?';
 		break;
 }
