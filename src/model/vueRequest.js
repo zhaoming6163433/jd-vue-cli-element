@@ -2,67 +2,82 @@ import Vue from 'vue';
 import appConfigs from 'src/configs'
 import util from 'src/util/util.js'
 
-export default async(apiurl = '', params = {}, type = 'GET', method = '', userparam = false) => {
+export default async (apiurl = '', params = {}, type = 'GET', method = '', userparam = false) => {
     type = type.toUpperCase();
-	if(method == 'ajax'){
-		return new Promise((resolve, reject) => {
+
+    function handleres(res,resolve) {
+        if (res.data && res.data.respCode == 0) {
+            resolve(res.data.result);
+        } else
+        if (res.data && res.data.respCode == 1000 || res.data && res.data.respCode == 1001) { //未登录直接跳转
+            reject(res);
+            util.vuethis.$router.push({
+                "name": "login"
+            });
+        } else {
+            util.errortip(res.data && res.data.message);
+            reject(res)
+        }
+    }
+    if (method == 'ajax') {
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: apiurl,
                 data: params,
                 type: "POST",
-                contentType : false,
-                processData : false,
+                contentType: false,
+                processData: false,
                 success: function (res) {
-                    if(res.code == 0){
+                    if (res.code == 0) {
                         resolve(res)
-                    }else
-                    if(res.code == 1000||res.code == 1001){//未登录直接跳转
+                    } else
+                    if (res.code == 1000 || res.code == 1001) { //未登录直接跳转
                         reject(res);
-                        util.vuethis.$router.push({"name":"login"});
-                    }else if(res.code == 1002){
+                        util.vuethis.$router.push({
+                            "name": "login"
+                        });
+                    } else if (res.code == 1002) {
                         util.warningtip("请完善信息后操作");
-                        util.vuethis.$router.push({"name":"hospitalinfo"});
-                    }else{
+                        util.vuethis.$router.push({
+                            "name": "hospitalinfo"
+                        });
+                    } else {
                         util.errortip(res.message);
                         reject(res)
                     }
                 },
-                error:function(res){
+                error: function (res) {
                     reject(res);
                 },
-                timeout:appConfigs.timeout
+                timeout: appConfigs.timeout
             });
-	    });
-	}else{
-		return new Promise((resolve, reject) => {
-			Vue.http({
-				method : type,
-				url : apiurl,
-				timeout:appConfigs.timeout,
-				headers : {
-					'Content-Type':'application/json;charset=utf-8',
-				},
-                body : type == 'POST'&&!userparam ? params: '',
-                params: type == 'GET'&&!userparam || type == 'POST'&&userparam ? params: ''
-			}).then(res => {
-				if(res.body&&res.body.respCode == 0 || res.body&&res.body.success == true){
-						resolve(res.body.result);
-				}else
-				if(res.body&&res.body.respCode == 1000||res.body&&res.body.respCode == 1001){//未登录直接跳转
-                    reject(res);
-                    util.vuethis.$router.push({"name":"login"});
-				}else if(res.body&&res.body.respCode == 1002){
-                    reject(res);
-                    util.warningtip("请完善信息后操作");
-                    util.vuethis.$router.push({"name":"hospitalinfo"});
-                }else{
-                    util.errortip(res.body&&res.body.message);
-					reject(res)
-				}
-			}).catch(err => {
-                util.errortip('网络请求失败');
-				reject(err)
-			})
-		});
-	}
+        });
+    } else {
+        return new Promise((resolve, reject) => {
+            if (type == "GET") {
+                Vue.prototype.$http.get(apiurl, {
+                        params: params
+                    })
+                    .then(function (res) {
+                        handleres(res,resolve);
+                    })
+                    .catch(function (err) {
+                        util.errortip('网络请求失败');
+                        reject(err);
+                    });
+            }
+            if (type == "POST") {
+                Vue.prototype.$http.post(apiurl, {
+                        params: params
+                    })
+                    .then(function (res) {
+                        handleres(res,resolve);
+                    })
+                    .catch(function (err) {
+                        util.errortip('网络请求失败');
+                        reject(err);
+                    });
+            }
+        });
+    }
 }

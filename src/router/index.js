@@ -13,7 +13,7 @@ export default new Router({
         /*{ path: '*', component: NotFoundComponent },//404页面*/
         { //菜单内容页面
             path: '/',
-            name: 'index',
+            name: '',
             component: index,
             children: [
                 /*首页*/

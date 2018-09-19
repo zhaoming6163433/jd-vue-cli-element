@@ -5,7 +5,8 @@ import ELEMENTUI from 'element-ui'
 import MintUI from 'mint-ui'
 import $ from 'n-zepto'
 import router from './router'
-import VueResource from 'vue-resource'
+//import VueResource from 'vue-resource'
+import axios from 'axios'
 import vueutil from './util/vueutil.js'
 import store from './store'
 import '../static/css/animate.min.css'
@@ -17,10 +18,11 @@ import App from './App'
 
 //阻止vue在启动时生成生产提示
 Vue.config.productionTip = false
-Vue.use(VueResource);
+//Vue.use(VueResource);
 Vue.use(ELEMENTUI);
 Vue.use(MintUI);
 Vue.use(vueutil);
+Vue.prototype.$http = axios
 
 /* eslint-disable no-new */
 new Vue({

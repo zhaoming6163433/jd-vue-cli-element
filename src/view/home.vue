@@ -32,12 +32,10 @@ export default {
         async typelist() {
             try {
                 let res = await health_list();
-                console.log(res)
                 this.list = res.list;
                 util.vueEvent.$emit("disloadingpage");
             } catch (err) {
                 util.vueEvent.$emit("disloadingpage");
-                console.log(err)
             }
         },
         godetail(id) {
@@ -46,6 +44,7 @@ export default {
     },
     mounted() {
         util.vueEvent.$emit("loadingpage");
+
         this.typelist();
     }
 }

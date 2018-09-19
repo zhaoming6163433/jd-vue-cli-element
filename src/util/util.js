@@ -248,7 +248,6 @@ const utils = {
         });
     },
     loadingopen(){
-        console.log(123)
         Vue.$indicator.open();
     },
     loadingclose(){
