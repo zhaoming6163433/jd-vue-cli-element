@@ -31,6 +31,9 @@ module.exports = {
             'components': path.resolve(__dirname, '../src/components')
         }
     },
+    externals: {
+        'vue':'Vue'
+    },
     module: {
         rules: [{
                 test: /\.vue$/,
